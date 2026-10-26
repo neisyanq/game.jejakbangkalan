@@ -1,0 +1,936 @@
+/* ==========================================================================
+   GLOBAL DESIGN TOKENS, RESPONSIVE ENGINE & MULTI-DEVICE ARCHITECTURE
+   JEJAK BANGKALAN HERITAGE - PHONE, TABLET, LAPTOP & DESKTOP ULTRA RESPONSIVE
+   ========================================================================== */
+
+:root {
+  --primary-red: #A83232;
+  --primary-red-dark: #872525;
+  --primary-dark: #8C6228;
+  --primary-gold: #B4863A;
+  --primary-gold-light: #DFC89B;
+  --secondary-blue: #755123;
+  --bg-cream: #FAF6EC;
+  --bg-light: #FFF9F2;
+  --bg-card: #FFFFFF;
+  --text-dark: #2C1E14;
+  --text-gray: #6B5E53;
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --shadow-soft: 0 10px 30px rgba(140, 98, 40, 0.08);
+  --shadow-hover: 0 18px 45px rgba(140, 98, 40, 0.14);
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+/* ==========================================================================
+   RESET & ZERO HORIZONTAL OVERFLOW ENGINE
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto;
+  background-color: var(--bg-cream);
+  color: var(--text-dark);
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  position: relative;
+}
+
+#root,
+.jejak-app-root,
+.jejak-page-container {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  min-height: 100dvh;
+  overflow-x: hidden !important;
+}
+
+/* Touch Performance: Remove 300ms tap delay on mobile */
+a,
+button,
+input,
+select,
+textarea,
+.btn,
+.nav-link,
+.bento-card,
+.card-discover,
+.warisan-filter-btn {
+  touch-action: manipulation;
+}
+
+/* Media elements fluid behavior */
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   PERFORMANCE & 60FPS OPTIMIZATIONS (ELIMINATE LAG)
+   ========================================================================== */
+.navbar,
+.floating-chat,
+.card-discover,
+.bento-card,
+.vt-slider-wrapper,
+.modal-content,
+.stats-box-custom {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@media (max-width: 768px) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   UNIFIED RESPONSIVE NAVBAR SYSTEM ACROSS ALL DEVICES
+   ========================================================================== */
+.navbar {
+  padding: 16px 0 !important;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 1050 !important;
+}
+
+.navbar.scrolled {
+  padding: 10px 0 !important;
+}
+
+.navbar .container-fluid {
+  max-width: 1380px;
+}
+
+/* Logo Sizing */
+.navbar-logo-custom {
+  height: 75px;
+  width: auto;
+  max-width: 240px;
+  object-fit: contain;
+  margin-top: -6px;
+  margin-left: 15px;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 1400px) {
+  .navbar-logo-custom {
+    height: 82px;
+    margin-left: 20px;
+  }
+}
+
+/* Laptop Compact & Tablet Landscape (992px - 1199.98px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .navbar {
+    padding: 10px 0 !important;
+  }
+
+  .navbar-logo-custom {
+    height: 56px !important;
+    margin-left: 5px !important;
+    max-width: 190px !important;
+  }
+
+  .navbar-nav-custom,
+  .navbar-nav {
+    transform: none !important;
+    gap: 0.25rem !important;
+  }
+
+  .nav-link {
+    padding: 6px 12px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .nav-user-chip {
+    padding: 4px 12px 4px 6px !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Tablet Portrait & Mobile (< 992px) */
+@media (max-width: 991.98px) {
+  .navbar {
+    padding: 8px 0 !important;
+  }
+
+  .navbar-logo-custom {
+    height: 50px !important;
+    max-width: 170px !important;
+    margin: 0 !important;
+  }
+
+  .navbar-toggler {
+    padding: 6px 10px !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    border: 1px solid rgba(140, 98, 40, 0.15) !important;
+  }
+
+  /* Mobile Glassmorphic Navigation Card */
+  .navbar-collapse {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    padding: 1.25rem 1rem !important;
+    border-radius: 20px !important;
+    box-shadow: 0 18px 45px rgba(62, 30, 8, 0.14) !important;
+    margin-top: 10px !important;
+    border: 1px solid #EFEBE1 !important;
+    max-height: calc(85dvh - 70px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .navbar-nav-custom,
+  .navbar-nav {
+    transform: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0.35rem !important;
+    width: 100% !important;
+  }
+
+  .nav-item {
+    width: 100% !important;
+    text-align: center !important;
+  }
+
+  .nav-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 44px !important;
+    padding: 10px 16px !important;
+    border-radius: 12px !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+  }
+
+  .js-nav-user-wrapper,
+  .nav-user-chip-wrap {
+    margin-top: 12px !important;
+    padding-top: 12px !important;
+    border-top: 1px solid #EFEBE1 !important;
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  .js-nav-user-wrapper > div {
+    justify-content: center !important;
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-logo-custom {
+    height: 42px !important;
+    max-width: 145px !important;
+  }
+}
+
+/* User Chip Styling */
+.nav-user-chip {
+  background: #ffffff !important;
+  border: 1px solid #E5E7EB !important;
+  padding: 5px 16px 5px 6px !important;
+  border-radius: 40px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.25s ease !important;
+  box-shadow: 0 3px 10px rgba(140, 98, 40, 0.06) !important;
+}
+
+.nav-user-chip:hover {
+  box-shadow: 0 6px 18px rgba(140, 98, 40, 0.15) !important;
+  transform: translateY(-2px) !important;
+}
+
+/* ==========================================================================
+   FLUID TYPOGRAPHY & HEADINGS SCALING
+   ========================================================================== */
+h1,
+.hero-title,
+.warisan-hero-title,
+.game-title,
+.catalog-hero-title {
+  font-size: clamp(1.8rem, 4.2vw + 0.4rem, 3.25rem) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.02em;
+}
+
+h2,
+.section-title,
+.bento-title {
+  font-size: clamp(1.45rem, 3vw + 0.2rem, 2.35rem) !important;
+  line-height: 1.25 !important;
+}
+
+h3 {
+  font-size: clamp(1.2rem, 2vw + 0.2rem, 1.7rem) !important;
+}
+
+p,
+.hero-text,
+.warisan-hero-desc,
+.game-desc,
+.section-desc {
+  font-size: clamp(0.9rem, 1.1vw + 0.1rem, 1.05rem);
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   HERO SECTIONS RESPONSIVE ACROSS ALL PAGES
+   ========================================================================== */
+.hero-section,
+.warisan-hero,
+.game-hero,
+.tentang-hero {
+  padding-top: calc(88px + env(safe-area-inset-top, 0px)) !important;
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 992px) {
+  .hero-section,
+  .warisan-hero,
+  .game-hero,
+  .tentang-hero {
+    padding-top: 120px !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .hero-section,
+  .warisan-hero,
+  .game-hero,
+  .tentang-hero {
+    padding-top: 135px !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-btn-group {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    width: 100% !important;
+  }
+
+  .hero-btn-group button,
+  .hero-btn-group a {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 12px 20px !important;
+  }
+}
+
+/* ==========================================================================
+   BENTO GRID & DISCOVER SLIDER RESPONSIVE
+   ========================================================================== */
+@media (max-width: 991.98px) {
+  .bento-grid-layout {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 12px !important;
+    padding-bottom: 12px !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .bento-card {
+    flex: 0 0 220px !important;
+    scroll-snap-align: start !important;
+    min-height: 85px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .bento-card {
+    flex: 0 0 195px !important;
+    padding: 12px 14px !important;
+  }
+
+  .bento-card h4 {
+    font-size: 0.95rem !important;
+  }
+
+  .bento-card p {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* Destinasi Discover Scroll */
+@media (max-width: 767.98px) {
+  .discover-scroll {
+    padding: 10px 16px !important;
+    gap: 14px !important;
+  }
+
+  .discover-item {
+    flex: 0 0 min(290px, 80vw) !important;
+  }
+}
+
+/* ==========================================================================
+   STATISTICS BOX RESPONSIVE
+   ========================================================================== */
+.stats-box-custom {
+  background-color: var(--primary-dark);
+  border-radius: 30px;
+  padding: 45px 20px;
+  box-shadow: 0 15px 40px rgba(140, 98, 40, 0.15);
+  margin: 30px 0;
+  position: relative;
+  z-index: 5;
+}
+
+@media (max-width: 767.98px) {
+  .stats-box-custom {
+    padding: 25px 14px !important;
+    border-radius: 20px !important;
+    margin: 20px 0 !important;
+  }
+
+  .stat-number-custom {
+    font-size: clamp(1.8rem, 5vw, 2.4rem) !important;
+  }
+
+  .stat-label-custom {
+    font-size: 0.75rem !important;
+  }
+}
+
+/* ==========================================================================
+   ARSIP BUDAYA & VIRTUAL TOUR CAROUSEL (BERANDA & TENTANG KAMI)
+   ========================================================================== */
+.food-card {
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  min-height: 320px !important;
+  position: relative !important;
+  background-color: #2b1407 !important;
+}
+
+.food-card .food-info {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.5) 60%, transparent 100%) !important;
+  padding: 20px !important;
+}
+
+.food-card .food-info h4 {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9) !important;
+  font-weight: 800 !important;
+}
+
+.food-card .food-info .badge {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
+  font-weight: 700 !important;
+}
+
+.vt-slider-wrapper {
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  height: clamp(300px, 45vh, 460px) !important;
+  min-height: 300px !important;
+  width: 100% !important;
+  position: relative !important;
+  background: #000 !important;
+}
+
+.vt-tutorial-overlay h6,
+.vt-tutorial-overlay h5 {
+  color: #FFFFFF !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
+}
+
+@media (max-width: 575.98px) {
+  .vt-slider-wrapper {
+    height: 290px !important;
+    min-height: 290px !important;
+    border-radius: 16px !important;
+  }
+
+  .vt-nav-btn {
+    width: 38px !important;
+    height: 38px !important;
+  }
+}
+
+/* ==========================================================================
+   INTERACTIVE MAP (LEAFLET) RESPONSIVE
+   ========================================================================== */
+.map-inner-wrapper {
+  height: clamp(330px, 50vh, 500px) !important;
+  min-height: 330px !important;
+  border-radius: 24px !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 767.98px) {
+  .map-inner-wrapper {
+    height: 340px !important;
+    min-height: 340px !important;
+    border-radius: 18px !important;
+  }
+
+  .map-overlay-slant {
+    padding: 12px 16px !important;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.45)) !important;
+  }
+
+  .map-overlay-slant h5 {
+    font-size: 0.95rem !important;
+  }
+
+  .map-overlay-slant p {
+    font-size: 0.78rem !important;
+  }
+
+  .map-compass {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   WARISAN BUDAYA PAGE RESPONSIVE EXCELLENCE
+   ========================================================================== */
+.warisan-filter-bar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+@media (max-width: 1199.98px) {
+  .warisan-filter-bar {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    justify-content: flex-start !important;
+    gap: 10px !important;
+    padding: 12px 14px !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .warisan-filter-btn {
+    flex: 0 0 auto !important;
+    scroll-snap-align: start !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* Katalog Grid Dynamic Breakpoints */
+.katalog-grid {
+  display: grid !important;
+  gap: 20px !important;
+}
+
+@media (min-width: 1400px) {
+  .katalog-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 24px !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1399.98px) {
+  .katalog-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px !important;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .katalog-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .katalog-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+.card-discover {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  border-radius: 20px !important;
+  border: 1px solid #EFEBE1 !important;
+  background: #FFFFFF !important;
+}
+
+.card-discover .img-wrapper {
+  height: clamp(185px, 24vw, 220px) !important;
+  background: linear-gradient(135deg, #f2ece0 0%, #e5dbc7 100%) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  margin: 12px 12px 0 12px !important;
+}
+
+.card-discover .img-wrapper img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+/* ==========================================================================
+   VIRTUAL TOUR PAGE (MAP 360) RESPONSIVE ENGINE
+   ========================================================================== */
+.virtual-tour-page {
+  height: 100dvh !important;
+  width: 100% !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.vt-map-viewport {
+  height: 100dvh !important;
+  width: 100% !important;
+}
+
+.vt-mode-toggle-wrap {
+  top: calc(96px + env(safe-area-inset-top, 0px)) !important;
+  right: 16px !important;
+  z-index: 1000 !important;
+}
+
+@media (min-width: 992px) {
+  .vt-mode-toggle-wrap {
+    top: 100px !important;
+    right: 30px !important;
+  }
+}
+
+.vt-zoom-controls {
+  position: absolute !important;
+  bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important;
+  right: 14px !important;
+  z-index: 998 !important;
+}
+
+@media (min-width: 768px) {
+  .vt-zoom-controls {
+    bottom: 35px !important;
+    right: 26px !important;
+  }
+}
+
+/* Position chat button cleanly on Virtual Tour without overlap */
+.virtual-tour-page ~ .floating-chat,
+.virtual-tour-page .floating-chat {
+  bottom: max(16px, env(safe-area-inset-bottom, 16px)) !important;
+  right: 14px !important;
+}
+
+@media (min-width: 768px) {
+  .virtual-tour-page ~ .floating-chat,
+  .virtual-tour-page .floating-chat {
+    bottom: 35px !important;
+    right: 95px !important;
+  }
+}
+
+/* Leaflet Attribution Mobile Discretion */
+@media (max-width: 767.98px) {
+  .leaflet-control-attribution {
+    font-size: 9px !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    margin-bottom: calc(2px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* ==========================================================================
+   ASISTEN CERDAS (AI CHAT) RESPONSIVE ENGINE
+   ========================================================================== */
+.ai-page {
+  display: flex !important;
+  flex-direction: column !important;
+  position: relative !important;
+  background: var(--bg-light) !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  padding-top: calc(98px + env(safe-area-inset-top, 0px)) !important;
+  padding-bottom: 0 !important;
+  overflow: hidden !important;
+  width: 100% !important;
+}
+
+@media (min-width: 992px) {
+  .ai-page {
+    padding-top: clamp(90px, 11vh, 115px) !important;
+  }
+}
+
+.ai-chat-header {
+  padding: 12px 18px !important;
+  min-height: 58px !important;
+}
+
+@media (max-width: 991.98px) {
+  .ai-chat-header {
+    padding: 10px 14px !important;
+    min-height: 54px !important;
+  }
+
+  .ai-chat-avatar {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .ai-chat-title {
+    font-size: clamp(0.92rem, 3.2vw, 1.05rem) !important;
+  }
+
+  .ai-chat-input-area {
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 8px)) !important;
+  }
+
+  #fullScreenChatInput {
+    font-size: 16px !important; /* iOS zoom prevention */
+  }
+}
+
+/* ==========================================================================
+   GAME, LABIRIN & LAUT RESPONSIVE QUIZ & CANVAS ENGINE
+   ========================================================================== */
+.gl-content {
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  padding: 0 15px !important;
+}
+
+@media (max-width: 1199.98px) {
+  .gl-content {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 15px !important;
+  }
+
+  .gl-character-area {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    max-width: 600px !important;
+  }
+
+  .gl-character-img {
+    width: 65px !important;
+    height: auto !important;
+  }
+}
+
+.gl-quiz-panel {
+  width: 100% !important;
+  max-width: min(850px, 94vw) !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 991.98px) {
+  .gl-quiz-panel {
+    height: auto !important;
+    min-height: 360px !important;
+    padding: 45px 18px 20px !important;
+  }
+}
+
+#adventureWrapper {
+  height: 100dvh !important;
+  max-width: 100vw !important;
+}
+
+#gameCanvas {
+  max-width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+/* ==========================================================================
+   TENTANG KAMI RESPONSIVE ENGINE
+   ========================================================================== */
+.tentang-page {
+  width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+@media (max-width: 991.98px) {
+  .stats-card-container {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+    padding: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-card-container {
+    grid-template-columns: 1fr !important;
+    padding: 16px !important;
+  }
+}
+
+/* ==========================================================================
+   FLOATING CHATBOT BUTTON (UNIVERSAL POSITIONING)
+   ========================================================================== */
+.floating-chat {
+  position: fixed !important;
+  bottom: 26px !important;
+  right: 26px !important;
+  background: var(--primary-dark) !important;
+  color: white !important;
+  width: 58px !important;
+  height: 58px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.5rem !important;
+  box-shadow: 0 10px 25px rgba(140, 98, 40, 0.35) !important;
+  border: 3px solid #ffffff !important;
+  z-index: 1040 !important;
+  cursor: pointer !important;
+  transition: transform 0.25s ease, background-color 0.25s ease !important;
+}
+
+.floating-chat:hover {
+  transform: scale(1.08) !important;
+  background-color: var(--primary-red) !important;
+}
+
+@media (max-width: 767.98px) {
+  .floating-chat {
+    bottom: max(16px, env(safe-area-inset-bottom, 16px)) !important;
+    right: 16px !important;
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 1.25rem !important;
+  }
+}
+
+/* ==========================================================================
+   MODALS RESPONSIVE EXCELLENCE
+   ========================================================================== */
+.modal-dialog {
+  max-width: min(92vw, 850px);
+  margin: 1.25rem auto;
+}
+
+.modal-content {
+  border-radius: 22px !important;
+  border: none !important;
+  overflow: hidden !important;
+  box-shadow: 0 25px 60px rgba(44, 30, 20, 0.2) !important;
+}
+
+@media (max-width: 575.98px) {
+  .modal-dialog {
+    max-width: calc(100vw - 20px) !important;
+    margin: 10px auto !important;
+  }
+
+  .modal-body {
+    padding: 16px !important;
+  }
+}
+
+.profile-modal-dialog,
+#userProfileModal .modal-dialog {
+  max-width: 380px !important;
+}
+
+.profile-avatar-img {
+  width: 86px !important;
+  height: 86px !important;
+  max-width: 86px !important;
+  max-height: 86px !important;
+  border-radius: 50% !important;
+  border: 4px solid #FFFFFF !important;
+  object-fit: cover !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12) !important;
+}
+
+#userProfileModal .btn-close {
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  z-index: 1055 !important;
+  background-color: rgba(241, 237, 226, 0.9) !important;
+  border-radius: 50% !important;
+  padding: 8px !important;
+  opacity: 0.9 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  transition: opacity 0.2s ease !important;
+}
+
+#userProfileModal .btn-close:hover {
+  opacity: 1 !important;
+  background-color: #e2dac9 !important;
+}
+
+/* Smooth Horizontal Scrollbars across mobile carousels */
+.warisan-filter-bar,
+.bento-grid-layout,
+.discover-scroll,
+.feature-bar-v2,
+.ai-quick-suggestions {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.warisan-filter-bar::-webkit-scrollbar,
+.bento-grid-layout::-webkit-scrollbar,
+.discover-scroll::-webkit-scrollbar,
+.feature-bar-v2::-webkit-scrollbar,
+.ai-quick-suggestions::-webkit-scrollbar {
+  display: none;
+}

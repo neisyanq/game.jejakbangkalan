@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+dist/
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# IDE & OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# JANGAN abaikan database dan chroma_db agar data 87 dokumen & user awal ikut ter-deploy
+!chroma_db/
+!database/jejak_bangkalan.db
