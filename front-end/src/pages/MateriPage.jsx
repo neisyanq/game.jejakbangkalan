@@ -3867,8 +3867,9 @@ export default function MateriPage() {
 
         const fetchKamusStats = async () => {
             try {
-                // Pastikan URL API PHP Sesuai dengan konfigurasi server laragon anda
-                const response = await fetch('http://localhost/jejakbangkalan/api_kamus.php?action=stats&dialect=bangkalan');
+                // AMBIL URL DARI ENV
+                const API_URL = import.meta.env.VITE_API_URL; 
+                const response = await fetch(`${API_URL}?action=stats&dialect=bangkalan`);
                 const res = await response.json();
 
                 if (res.status === 'success' && res.data) {
@@ -4091,8 +4092,10 @@ export default function MateriPage() {
                 if (mainWord) mainWord.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="font-size:2.5rem; color:#D97706;"></i>';
                 if (artiWord) artiWord.innerHTML = `Mencari ke database untuk "${query}" ...`;
 
+                // AMBIL URL DARI ENV
+                const API_URL = import.meta.env.VITE_API_URL;
                 const langMode = isIndoToMadura ? 'ind2mad' : 'mad2ind';
-                const apiUrl = `http://localhost/jejakbangkalan/api_kamus.php?action=search&q=${encodeURIComponent(query)}&lang=${langMode}&dialect=bangkalan`;
+                const apiUrl = `${API_URL}?action=search&q=${encodeURIComponent(query)}&lang=${langMode}&dialect=bangkalan`;
 
                 fetch(apiUrl)
                     .then(response => response.json())
