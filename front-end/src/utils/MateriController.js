@@ -224,10 +224,13 @@ export function initMateriPage(navigate) {
     let isIndoToMadura = true;
 
     // Menarik Statistik Jumlah Kata di Database
+    // Menarik Statistik Jumlah Kata di Database
     const fetchKamusStats = async() => {
         try {
-            // PASTIKAN URL API SESUAI DENGAN FOLDER PROJECT LARAGON ANDA
-            const response = await fetch('http://localhost/jejakbangkalan/api_kamus.php?action=stats');
+            // AMBIL URL DARI ENV
+            const API_URL =
+                import.meta.env.VITE_API_URL;
+            const response = await fetch(`${API_URL}?action=stats&dialect=bangkalan`);
             const res = await response.json();
 
             if (res.status === 'success' && res.data) {
@@ -389,9 +392,11 @@ export function initMateriPage(navigate) {
             if (mainWord) mainWord.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="font-size:2.5rem; color:#D97706;"></i>';
             if (artiWord) artiWord.innerHTML = `Mencari ke database untuk "${query}" ...`;
 
-            // Hit API
+            // Hit API MENGGUNAKAN ENV
+            const API_URL =
+                import.meta.env.VITE_API_URL;
             const langMode = isIndoToMadura ? 'ind2mad' : 'mad2ind';
-            const apiUrl = `http://localhost/jejakbangkalan/api_kamus.php?action=search&q=${encodeURIComponent(query)}&lang=${langMode}`;
+            const apiUrl = `${API_URL}?action=search&q=${encodeURIComponent(query)}&lang=${langMode}&dialect=bangkalan`;
 
             fetch(apiUrl)
                 .then(response => response.json())
